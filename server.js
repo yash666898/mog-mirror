@@ -2,15 +2,20 @@ import "dotenv/config";
 import express from "express";
 import multer from "multer";
 import { GoogleGenAI } from "@google/genai";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 const app = express();
+const projectDirectory = path.dirname(fileURLToPath(import.meta.url));
+const publicDirectory = path.join(projectDirectory, "public");
 const upload = multer({
   storage: multer.memoryStorage(),
   limits: { fileSize: 8 * 1024 * 1024 },
   fileFilter: (_req, file, done) => done(null, /^image\/(jpeg|png|webp)$/.test(file.mimetype))
 });
 
-app.use(express.static("public"));
+app.use(express.static(publicDirectory));
+app.get("/", (_req, res) => res.sendFile(path.join(publicDirectory, "index.html")));
 
 const responseSchema = {
   type: "object",
@@ -69,4 +74,9 @@ app.post("/api/analyze", upload.single("image"), async (req, res) => {
   }
 });
 
-app.listen(process.env.PORT || 3000, () => console.log("Mog Mirror running at http://localhost:" + (process.env.PORT || 3000)));
+export default app;
+
+// Vercel imports the Express app as a serverless function. Locally, Node starts it.
+if (!process.env.VERCEL) {
+  app.listen(process.env.PORT || 3000, () => console.log("Mog Mirror running at http://localhost:" + (process.env.PORT || 3000)));
+}
