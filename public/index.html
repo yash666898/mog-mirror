@@ -1,0 +1,23 @@
+<!doctype html><html lang="en"><head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Mog Mirror — photo presence coach</title><link rel="stylesheet" href="style.css"/>
+</head><body>
+  <main>
+    <nav><a class="brand" href="/">MOG<span>•</span>MIRROR</a><span class="tag">Gemma-powered · private by design</span></nav>
+    <section class="hero"><p class="eyebrow">YOUR BEST ANGLE, EXPLAINED</p><h1>Better photo presence.<br/><i>Zero</i> harsh ratings.</h1><p class="intro">Upload a photo you own or have permission to use. Get clear, practical notes on the visible presentation—not a score or a judgment.</p></section>
+    <section class="workspace">
+      <form id="form" class="upload-card">
+        <label id="dropzone" for="image"><input id="image" name="image" type="file" accept="image/jpeg,image/png,image/webp" required/><span class="plus">+</span><strong>Drop a photo here</strong><small>or click to browse · JPG, PNG, WebP · max 8 MB</small><img id="preview" alt="Selected image preview"/></label>
+        <button id="camera" class="camera" type="button">Use camera <span>◉</span></button>
+        <label class="consent"><input id="consent" type="checkbox" required/> I own this photo or have the person’s permission to analyze it.</label>
+        <button id="submit" type="submit">Read my photo presence <span>→</span></button>
+      </form>
+      <aside id="empty" class="result-card"><p class="eyebrow">HOW IT WORKS</p><h2>See what the camera sees.</h2><ol><li>Upload a consented photo</li><li>Gemma reads visible presentation cues</li><li>Try the next-shot suggestion</li></ol><p class="fine">Images are processed for this request and not saved by this demo server.</p></aside>
+      <aside id="loading" class="result-card hidden"><div class="orb"></div><p class="eyebrow">GEMMA IS LOOKING</p><h2>Finding practical improvements…</h2></aside>
+      <aside id="result" class="result-card hidden"></aside>
+    </section>
+  </main><footer>Playful feedback, not an attractiveness verdict. Be kind to yourself.</footer>
+  <dialog id="cameraDialog"><div class="camera-head"><b>Live face check</b><button id="closeCamera" type="button" aria-label="Close camera">×</button></div><div class="camera-stage"><video id="cameraFeed" autoplay playsinline></video><div class="face-guide"></div><div id="liveScore" class="live-score">--<small>/10</small></div></div><canvas id="snapshot" hidden></canvas><section id="livePanel" class="live-panel"><p class="eyebrow">LIVE CAMERA READINESS</p><b id="liveStatus">Starting camera…</b><p id="liveTip">Center your face inside the guide.</p><div class="live-bars"><span>Framing <i data-bar="framing"></i></span><span>Light <i data-bar="light"></i></span><span>Face detail <i data-bar="detail"></i></span></div></section><p id="cameraError" class="camera-error" hidden></p><div class="camera-actions"><button id="mirror" class="secondary" type="button">Mirror view: off</button><button id="capture" type="button">Capture photo</button><button id="retake" type="button" hidden>Retake</button><button id="usePhoto" type="button" hidden>Use this photo</button></div></dialog>
+  <style>#cameraFeed.mirrored{transform:scaleX(-1)}.camera-actions{flex-wrap:wrap}.camera-actions .secondary{background:#edf1e9;color:#173f39;border:1px solid #d3dcd4}</style>
+  <script src="app.js"></script>
+</body></html>
